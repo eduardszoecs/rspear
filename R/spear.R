@@ -10,9 +10,34 @@
 #' @param region character string: specify region
 #' @param traits path to traits database
 #' 
-#' @return A list with two entries: 
+#' @details
+#' The SPEAR index is based on binary classification of species (or other taxonomic categories) into 'species at risk' and 'species not at risk' according to the following biological traits: 
+#' \itemize{
+#' \item physiological sensitivity to organic toxicant
+#' \item generation time
+#' \item presence of aquatic stages in water during the maximum pesticide usage period
+#' \item migration abilities. 
+#' }
+#' A taxon is classified as a 'SPEcies At Risk' only if it has: (i) Sorganic value >-0.36, (ii) generation time >= 0.5 year, aquatic stages (eggs, larvae, pupae) during the periods of intensive pesticide usage, and (iv) low migration abilities. 
 #' 
+#' The SPEARpesticides index is computed as relative abundance of these taxa for each site and date as follows:
 #' 
+#' \deqn{SPEAR = \sum log10(x[i] + 1) * y / \sum log10(x[i] + 1)}
+#' 
+#' where x[i] is the abundance of the taxon i and y is 1 if taxon i is classified as 'at risk', otherwise 0. 
+#' 
+#' For further details about SPEARpesticides index see References.
+#'  
+#' @return A list of two data.frames:
+#' \item{spear}{SPEARvalues per group}
+#' \item{traits}{Trait table for each Taxon}
+#' 
+#' @references 
+#' Liess M, Von der Ohe P, 2005. Analyzing effects of pesticides on invertebrate communities in streams. \emph{Environmental Toxicology and Chemistry}, 24, 954-965.
+#' 
+#' Liess M, Schaefer R, Schriever C, 2008. The footprint of pesticide stress in communities - species traits reveal community effects of toxicants. \emph{Science of the Total Environment}, 406, 484-490.
+#' 
+#' @author Eduard Szöcs \email{szoe8822@@uni-landau.de}
 #' @export
 spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = NULL, traits = NULL){
   traits <- read.table(file=traits, 
