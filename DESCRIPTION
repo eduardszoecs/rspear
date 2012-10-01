@@ -5,5 +5,9 @@ Version: 0.1
 Date: 2012-10-01
 Author: Eduard Szöcs
 Maintainer: Eduard Szöcs <szoe8822@uni-landau.de>
-Description: Calculate SPEAR values in R (http://www.systemecology.eu/SPEAR/index.php)
+Description: Calculate SPEAR values in R
+    (http://www.systemecology.eu/SPEAR/index.php)
 License: MIT
+Collate:
+    'match_traits.R'
+    'spear.R'
