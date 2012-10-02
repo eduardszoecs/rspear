@@ -1,7 +1,14 @@
 #' Match data with Trait-Database
 #'
+#' @param x abundance-data
+#' @param y trait-table
+#' @param takex character string: taxa column-name
+#' @param takey character string: trait-table taxa column-name
+#' @param exact.first logic: should exact matches computed first?
 #' 
-match_traits <- function(x, y, takex, takey, s = seq(0, 1, 0.5), exact.first = TRUE) {
+#' @return a lookuptable, with original and matched data, as well as a match-value
+#' 
+match_traits <- function(x, y, takex, takey, exact.first = TRUE) {
   ## merged holds the matched data
   merged <- NULL
   # which colums should be compared?
@@ -27,7 +34,7 @@ match_traits <- function(x, y, takex, takey, s = seq(0, 1, 0.5), exact.first = T
     }
   }
   ## match approximately for each threshold in s
-  for (i in s) {
+  for (i in seq(0, 1, 0.5)) {
     tmp <- sapply(x.id, function(x) agrep(xtakel[x], ytakel[y.id],
                                          max.distance = i)[1])
     ## xm is a index of tmp with the non missing data

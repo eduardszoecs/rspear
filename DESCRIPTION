@@ -11,3 +11,5 @@ License: MIT
 Collate:
     'match_traits.R'
     'spear.R'
+Imports:
+    plyr (>= 1.0)
