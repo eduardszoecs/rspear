@@ -3,8 +3,8 @@ Type: Package
 Title: Calculate SPEAR values in R (http://www.systemecology.eu/SPEAR/index.php)
 Version: 0.1
 Date: 2012-10-01
-Author: Eduard Szöcs
-Maintainer: Eduard Szöcs <szoe8822@uni-landau.de>
+Author: Eduard Szoecs
+Maintainer: Eduard Szoecs <szoe8822@uni-landau.de>
 Description: Calculate SPEAR values in R
     (http://www.systemecology.eu/SPEAR/index.php)
 License: MIT

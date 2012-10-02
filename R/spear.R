@@ -37,7 +37,7 @@
 #' 
 #' Liess M, Schaefer R, Schriever C, 2008. The footprint of pesticide stress in communities - species traits reveal community effects of toxicants. \emph{Science of the Total Environment}, 406, 484-490.
 #' 
-#' @author Eduard Szöcs \email{szoe8822@@uni-landau.de}
+#' @author Eduard Szoecs \email{szoe8822@@uni-landau.de}
 #' @export
 spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = NULL, traits = NULL){
   traits <- read.table(file=traits, 

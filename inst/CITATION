@@ -1,9 +1,9 @@
 citHeader("To cite rspear in publications, please use:")
 
 citEntry(entry = "Article",
-  author = "Liess, Matthias and Schäfer, Ralf B. and Schriever, Carola A.",
+  author = "Liess, Matthias and Schaefer, Ralf B. and Schriever, Carola A.",
   title = "The footprint of pesticide stress in communities - Species traits reveal community effects of toxicants",
-  publisher = "Science of The Total Environment",
+  journal = "Science of The Total Environment",
   year = "2008",
   number = "406", 
   pages = "484--490",
