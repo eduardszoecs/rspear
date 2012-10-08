@@ -61,6 +61,5 @@ spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = NULL,
   spear <- ddply(df, group, function(x) c(SPEAR = 100 * sum(log(x[ ,abundance] + 1) * x$SPEAR) / sum(log(x[ ,abundance] + 1))))
   out = list(spear = spear, 
              traits = trait[ ,c("taxa_data", "taxa_matched", "match_val", "region", "exposed", "generationTime", "sensitivity", "migration", "SPEAR")])
-  class(out$traits) <- c("SPEAR_traits", "data.frame")
   return(out)
 }
