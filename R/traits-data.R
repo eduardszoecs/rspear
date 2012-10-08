@@ -1,5 +1,5 @@
 #' @name traits
 #' @title SPEAR-Traits
-#' @description A trait table
+#' @description Trait-database, version from 2. Oct 2012
 #' @docType data
 NULL
