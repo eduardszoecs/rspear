@@ -9,3 +9,16 @@ citEntry(entry = "Article",
   pages = "484--490",
   textVersion = "Liess M, Schaefer R, Schriever C, 2008. The footprint of pesticide stress in communities - species traits reveal community effects of toxicants. Science of the Total Environment, 406, 484-490."
 )
+
+citEntry(entry = "Article",
+  author = "Liess, Matthias and Von der Ohe, Peter",
+  title = " Analyzing effects of pesticides on invertebrate communities in streams",
+  journal = "Environmental Toxicology and Chemistry",
+  year = "2005",
+  number = "24",
+  pages = "954--965",
+  textVersion = "Liess M, Von der Ohe P, 2005. Analyzing effects of pesticides on invertebrate communities in streams. Environmental Toxicology and Chemistry, 24, 954-965."
+)
+
+
+
