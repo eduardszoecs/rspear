@@ -8,7 +8,7 @@
 #' @param group character vector naming the columns for groups
 #' @param abundance character string: columnname of abundances
 #' @param region character string: specify region
-#' @param traits path to traits database
+#' @param traits either a path to traits database or a data.frame object 
 #' 
 #' @details
 #' The SPEAR index is based on binary classification of species (or other taxonomic categories) into 'species at risk' and 'species not at risk' according to the following biological traits: 
@@ -40,10 +40,12 @@
 #' @author Eduard Szoecs \email{szoe8822@@uni-landau.de}
 #' @export
 spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = NULL, traits = NULL){
-  traits <- read.table(file=traits, 
-                   header = TRUE, 
-                   sep = ";", 
-                   stringsAsFactors = FALSE)
+  if(!is.data.frame(traits)) {
+    traits <- read.table(file=traits, 
+                     header = TRUE, 
+                     sep = ";", 
+                     stringsAsFactors = FALSE)
+  }
   traits <- traits[traits$region == region, ]
   db_match <- match_traits(x = x, y = traits, takex = taxa, takey = "name")
   trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
