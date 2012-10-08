@@ -12,5 +12,6 @@ Collate:
     'match_traits.R'
     'spear.R'
     'spear_example-data.R'
+    'traits-data.R'
 Imports:
     plyr (>= 1.0)
