@@ -1,0 +1,37 @@
+%\VignetteIndexEntry{rspear}
+\documentclass[article,nojss]{jss}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{sidecap}
+\usepackage{amsmath}
+
+\title{rspear: Calculate SPEAR in R} 
+\author{Eduard Sz??cs}
+
+\Abstract{TODO}
+\Keywords{TODO}
+
+\Address{This document has been
+  processed with rspear
+\Sexpr{packageDescription("rspear", field="Version")}
+in \Sexpr{R.version.string} on \today.}
+\Footername{About this version}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\tableofcontents
+
+~\\[2ex]
+\noindent \pkg{rspear} is a R-package to calculate SPEAR-Index.  This
+document explains the usage of \pkg{rspear}.  
+
+\section{Theoretical background}
+
+\section{Usage of rspear}
+
+\section{Case study}
+
+
+\end{document}
