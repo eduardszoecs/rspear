@@ -18,7 +18,8 @@
 
   \item{region}{character string: specify region}
 
-  \item{traits}{path to traits database}
+  \item{traits}{either a path to traits database or a
+  data.frame object}
 }
 \value{
   A list of two data.frames: \item{spear}{SPEARvalues per

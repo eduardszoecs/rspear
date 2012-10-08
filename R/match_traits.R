@@ -55,6 +55,7 @@ match_traits <- function(x, y, takex, takey, exact.first = TRUE) {
                     stringsAsFactors = FALSE)
   if(length(x.id) > 0){
     out <- rbind(out, c(xtake[x.id], NA, NA))
+    out$match_val <- as.numeric(out$match_val)
   }
   return(out)
 }

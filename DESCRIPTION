@@ -15,3 +15,5 @@ Collate:
     'traits-data.R'
 Imports:
     plyr (>= 1.0)
+Suggests:
+    testthat

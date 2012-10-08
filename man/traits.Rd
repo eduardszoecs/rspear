@@ -3,7 +3,7 @@
 \alias{traits}
 \title{SPEAR-Traits}
 \description{
-  A trait table
+  Trait-database, version from 2. Oct 2012
 }
 \keyword{datasets}
 
