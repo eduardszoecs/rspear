@@ -9,7 +9,7 @@
 #' @return a lookuptable, with original and matched data, as well as a match-value
 #' 
 match_traits <- function(x, y, takex, takey, exact.first = TRUE) {
-  ## merged holds the matched data
+  ## empty object to fill with matches...
   merged <- NULL
   # which colums should be compared?
   xtake <- unique(as.character(x[ , takex]))
@@ -34,7 +34,7 @@ match_traits <- function(x, y, takex, takey, exact.first = TRUE) {
     }
   }
   ## match approximately for each threshold in s
-  for (i in seq(0, 1, 0.5)) {
+  for (i in seq(0, 0.5, 0.1)) {
     tmp <- sapply(x.id, function(x) agrep(xtakel[x], ytakel[y.id],
                                          max.distance = i)[1])
     ## xm is a index of tmp with the non missing data
@@ -46,10 +46,12 @@ match_traits <- function(x, y, takex, takey, exact.first = TRUE) {
                                          y.id = y.id[tmp[xm]],
                                          threshold = i)))
       x.id <- x.id[!(x.id %in% merged[ , 1])]
-    }
+    }   
   }
   merged <- data.frame(merged)
-  out <- data.frame(taxa_data = xtake[merged$x.id], taxa_matched = ytake[merged$y.id], match_val = merged$threshold, 
+  out <- data.frame(taxa_data = xtake[merged$x.id], 
+                    taxa_matched = ytake[merged$y.id], 
+                    match_val = merged$threshold, 
                     stringsAsFactors = FALSE)
   if(length(x.id) > 0){
     out <- rbind(out, c(xtake[x.id], NA, NA))
