@@ -39,6 +39,19 @@
 #' 
 #' @author Eduard Szoecs \email{szoe8822@@uni-landau.de}
 #' @export
+#' @examples
+#' require(rspear)
+#' data(traits)
+#' data(spear_example)
+#' head(spear_example)
+#' sp <- spear(spear_example ,
+#'    taxa = "Taxon",
+#'    group = c("Year", "Site"), 
+#'    abundance = "Abundance", 
+#'    region = "Eurasia", 
+#'    traits=traits)
+#' sp$traits
+#' sp$spear
 spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = NULL, traits = NULL){
   if(!is.data.frame(traits)) {
     traits <- read.table(file=traits, 

@@ -7,6 +7,7 @@
 #' @param exact.first logic: should exact matches computed first?
 #' 
 #' @return a lookuptable, with original and matched data, as well as a match-value
+#' @export
 #' 
 match_traits <- function(x, y, takex, takey, exact.first = TRUE) {
   ## empty object to fill with matches...

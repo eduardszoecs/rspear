@@ -55,6 +55,19 @@
   For further details about SPEARpesticides index see
   References.
 }
+\examples{
+require(rspear)
+data(spear_example)
+data(traits)
+sp <- spear(spear_example ,
+   taxa = "Taxon",
+   group = c("Year", "Site"),
+   abundance = "Abundance",
+   region = "Eurasia",
+   traits=traits)
+sp$traits
+sp$spear
+}
 \author{
   Eduard Szoecs \email{szoe8822@uni-landau.de}
 }
