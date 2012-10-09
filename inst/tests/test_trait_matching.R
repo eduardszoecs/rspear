@@ -28,4 +28,3 @@ test_that(" Check direct matches", {
   direct <- na.omit(sp$traits[sp$traits$match_val == -1, ])
   expect_true(all(direct$taxa_data == direct$taxa_matched))
 })
-

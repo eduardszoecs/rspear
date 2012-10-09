@@ -58,8 +58,8 @@ spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = NULL,
                      header = TRUE, 
                      sep = ";", 
                      stringsAsFactors = FALSE)
+      traits <- traits[traits$region == region, ]
   }
-  traits <- traits[traits$region == region, ]
   db_match <- match_traits(x = x, y = traits, takex = taxa, takey = "name")
   trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
   trait$SPEAR <- ifelse(trait$sensitivity > -0.36 & 

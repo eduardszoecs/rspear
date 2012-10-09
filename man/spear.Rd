@@ -57,8 +57,9 @@
 }
 \examples{
 require(rspear)
-data(spear_example)
 data(traits)
+data(spear_example)
+head(spear_example)
 sp <- spear(spear_example ,
    taxa = "Taxon",
    group = c("Year", "Site"),
