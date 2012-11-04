@@ -52,7 +52,7 @@
 #'    traits=traits)
 #' sp$traits
 #' sp$spear
-spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = NULL, traits = NULL){
+spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = "Eurasia", traits = NULL){
   if(!is.data.frame(traits)) {
     traits <- read.table(file=traits, 
                      header = TRUE, 

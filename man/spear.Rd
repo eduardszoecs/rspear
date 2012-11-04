@@ -3,7 +3,7 @@
 \title{Calculate SPEAR values}
 \usage{
   spear(x, taxa = NULL, group = NULL, abundance = NULL,
-    region = NULL, traits = NULL)
+    region = "Eurasia", traits = NULL)
 }
 \arguments{
   \item{x}{Abundance data in long format}

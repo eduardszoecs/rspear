@@ -2,7 +2,7 @@ context("Trait Matching")
 
 require(rspear)
 data(spear_example)
-data(traits)
+###traits <- 
 
 sp <- spear(x = spear_example,  
       taxa = "Taxon", 
