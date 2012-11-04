@@ -11,8 +11,7 @@ License: MIT
 Collate:
     'match_traits.R'
     'spear.R'
-    'spear_example-data.R'
-    'traits-data.R'
+    'rspear-package.R'
 Imports:
     plyr (>= 1.0)
 Suggests:

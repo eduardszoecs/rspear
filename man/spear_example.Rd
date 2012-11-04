@@ -5,5 +5,8 @@
 \description{
   Abundance data in the long format
 }
+\details{
+  Example data
+}
 \keyword{datasets}
 

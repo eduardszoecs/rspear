@@ -2,7 +2,7 @@
 \alias{match_traits}
 \title{Match data with Trait-Database}
 \usage{
-  match_traits(x, y, takex, takey, exact.first = TRUE)
+  match_traits(x, y, takex, takey)
 }
 \arguments{
   \item{x}{abundance-data}
@@ -13,9 +13,6 @@
 
   \item{takey}{character string: trait-table taxa
   column-name}
-
-  \item{exact.first}{logic: should exact matches computed
-  first?}
 }
 \value{
   a lookuptable, with original and matched data, as well as
