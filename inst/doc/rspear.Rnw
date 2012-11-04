@@ -1,37 +1,68 @@
-%\VignetteIndexEntry{rspear}
-\documentclass[article,nojss]{jss}
+\documentclass{article}
+%%\VignetteIndexEntry{rspear-intro}
+%%\VignetteDepends{rspear}
 
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{sidecap}
+\usepackage{hyperref}
 \usepackage{amsmath}
 
 \title{rspear: Calculate SPEAR in R} 
-\author{Eduard Sz??cs}
+\author{Eduard Szoecs}
 
-\Abstract{TODO}
-\Keywords{TODO}
 
-\Address{This document has been
-  processed with rspear
-\Sexpr{packageDescription("rspear", field="Version")}
-in \Sexpr{R.version.string} on \today.}
-\Footername{About this version}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
+\maketitle  
 
 \tableofcontents
 
-~\\[2ex]
-\noindent \pkg{rspear} is a R-package to calculate SPEAR-Index.  This
-document explains the usage of \pkg{rspear}.  
-
 \section{Theoretical background}
 
+\section{Install rspear}
+rspear is currently under development and not available on CRAN yet. To use rspear you have to install it from github:
+<<eval=FALSE>>=
+install.packages("devtools")
+require(devtools)
+install_github("rspear", "EDiLD")
+require(rspear)
+@
+<<echo=FALSE, results=hide>>=
+require(rspear)
+@
+
 \section{Usage of rspear}
+The usage of the rspear-package is explained on fictitious example data. The example data is shipped with the package:
 
-\section{Case study}
+<<>>=
+data(spear_example)
+str(spear_example)
+@
 
+\subsection{Data requirements}
+Like the web application rspear requires data in the long format (see spear\_example). Ecologists often organized their data in wide format (eg. species x samples matrix). This data must be transformed into the long-format, eg using the melt() function from the reshape2 package.
+
+
+\subsection{Calculating SPEAR-values}
+The main function in the rspear-package is spear().
+<<>>=
+traitdb <- "/home/edisz/Documents/Uni/Projects/rspear/data/traits.csv"
+sp <- spear(spear_example , 
+            taxa = "Taxon", group = c("Year", "Site"), abundance = "Abundance", 
+            region = "Eurasia", 
+            traits=traitdb)
+@
+
+spear() takes as first argument the data.frame with the abundances. Then we must specify the columns coding the taxon-names, the abundaces and grouping variables. This can be done either by entering the names manually or with names() (the second option is less error-prune):
+
+<<eval=FALSE>>=
+sp <- spear(spear_example , 
+            taxa = names(spear_example)[1], group = names(spear_example)[3:4], 
+            abundance = names(spear_example)[2], 
+            region = "Eurasia", 
+            traits=traitdb)
+@
+
+After specifying the columns, 
 
 \end{document}
