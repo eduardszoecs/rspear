@@ -6,7 +6,6 @@
 #' @param takey character string: trait-table taxa column-name
 #' 
 #' @return a lookuptable, with original and matched data, as well as a match-value
-#' @export
 #' 
 match_traits <- function(x, y, takex, takey) {
   ## empty object to fill with matches...
