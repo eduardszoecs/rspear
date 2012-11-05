@@ -83,24 +83,30 @@ spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL,
                   migration = 0){
   if(is.null(traits)){
     traits <- rspear:::get_traits()
-  } else {
-    if(!is.data.frame(traits))
-      stop("traits must be a data.frame")
-  }
-  db_match <- rspear:::match_traits(x = x, y = traits, takex = taxa, takey = "name")
-  trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
-  trait$SPEAR <- ifelse(trait$sensitivity > sensitivity & 
-    trait$generationTime >= generationTime & 
-    trait$exposed == exposed & 
-    trait$migration == migration, 1, 0)
-  if(any(is.na(trait$taxa_matched)))
-    warning("There were unmatched species:\n", trait$taxa_data[is.na(trait$taxa_matched)], "\nSet SPEAR to 0.")
+    db_match <- rspear:::match_traits(x = x, y = traits, takex = taxa, takey = "name")
+    trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
+    if(any(is.na(trait$taxa_matched)))
+      warning("There were unmatched species:\n", trait$taxa_data[is.na(trait$taxa_matched)], "\nSet SPEAR to 0.")
+    if(any(trait$match_val > 0))
+      warning("Non-direct taxon matches!\nCheck trait table if match is appropiate!!")
+    trait$SPEAR <- ifelse(trait$sensitivity > sensitivity & 
+                            trait$generationTime >= generationTime & 
+                            trait$exposed == exposed & 
+                            trait$migration == migration, 1, 0)
     trait$SPEAR[is.na(trait$taxa_matched)] <- 0
-  if(any(trait$match_val > 0))
-    warning("Non-direct taxon matches!\nCheck trait table if match is appropiate!!")
+  } else {
+    if(!any(class(traits) == "spear")())
+      stop("traits must be of class 'spear'!")
+    trait <- traits
+    trait$SPEAR <- ifelse(trait$sensitivity > sensitivity & 
+                            trait$generationTime >= generationTime & 
+                            trait$exposed == exposed & 
+                            trait$migration == migration, 1, 0)
+  }
   df <- merge(x, trait, by.x = taxa, by.y = "taxa_data")
   spear <- ddply(df, group, function(x) c(SPEAR = 100 * sum(log(x[ ,abundance] + 1) * x$SPEAR) / sum(log(x[ ,abundance] + 1))))
   out = list(spear = spear, 
-             traits = trait[order(trait$match_val, decreasing = TRUE, na.last = FALSE) ,c("taxa_data", "taxa_matched", "match_val", "region", "exposed", "generationTime", "sensitivity", "migration", "SPEAR")])
+             traits = trait[order(trait$match_val, decreasing = TRUE, na.last = FALSE) ,c("taxa_data", "taxa_matched", "match_val", "region", "exposed", "generationTime", "sensitivity", "migration", "SPEAR")]
+  class(out$traits) <- c("data.frame", "spear")
   return(out)
 }
