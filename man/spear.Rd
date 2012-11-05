@@ -3,7 +3,7 @@
 \title{Calculate SPEAR values}
 \usage{
   spear(x, taxa = NULL, group = NULL, abundance = NULL,
-    region = "Eurasia", traits = NULL)
+    region = "Eurasia", traits = get_traits())
 }
 \arguments{
   \item{x}{Abundance data in long format}
@@ -57,15 +57,13 @@
 }
 \examples{
 require(rspear)
-data(traits)
 data(spear_example)
 head(spear_example)
 sp <- spear(spear_example ,
    taxa = "Taxon",
    group = c("Year", "Site"),
    abundance = "Abundance",
-   region = "Eurasia",
-   traits=traits)
+   region = "Eurasia")
 sp$traits
 sp$spear
 }

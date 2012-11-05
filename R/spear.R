@@ -41,18 +41,16 @@
 #' @export
 #' @examples
 #' require(rspear)
-#' data(traits)
 #' data(spear_example)
 #' head(spear_example)
 #' sp <- spear(spear_example ,
 #'    taxa = "Taxon",
 #'    group = c("Year", "Site"), 
 #'    abundance = "Abundance", 
-#'    region = "Eurasia", 
-#'    traits=traits)
+#'    region = "Eurasia")
 #' sp$traits
 #' sp$spear
-spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = "Eurasia", traits = NULL){
+spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = "Eurasia", traits = get_traits()){
   if(!is.data.frame(traits)) {
     traits <- read.table(file=traits, 
                      header = TRUE, 

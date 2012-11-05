@@ -12,6 +12,7 @@ Collate:
     'match_traits.R'
     'spear.R'
     'rspear-package.R'
+    'get_traits.R'
 Imports:
     plyr (>= 1.0)
 Suggests:

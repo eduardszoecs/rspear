@@ -8,8 +8,7 @@ sp <- spear(x = spear_example,
       taxa = "Taxon", 
       group = c("Year", "Site"), 
       abundance = "Abundance", 
-      region = "Eurasia", 
-      traits = traits)
+      region = "Eurasia")
 
 test_that("Check unmatched species", {
   expect_true(is.na(sp$traits[sp$traits$taxa_data == "xxxxxxxxx", 2]))
