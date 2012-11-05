@@ -8,7 +8,8 @@
 #' @param group character vector naming the columns for groups
 #' @param abundance character string: columnname of abundances
 #' @param region character string: specify region
-#' @param traits either a path to traits database or a data.frame object 
+#' @param traits a data.frame holding the trait-database. Default is set to the data.frame from \code{\link[=get_traits]{get_traits()}}.
+#' Also a modified trait-table can be supplied (see vignette).
 #' @param sensitivity numeric; sensitivity-threshold, default '-0.36'
 #' @param generationTime numeric; Generation Time threshold, default '0.5'
 #' @param exposed logical; either '1' (exposed) or '0' (not exposed), default '1'
@@ -30,7 +31,12 @@
 #' 
 #' where x[i] is the abundance of the taxon i and y is 1 if taxon i is classified as 'at risk', otherwise 0. 
 #' 
-#' For further details about SPEARpesticides index see References.
+#' For further details about SPEARpesticides see References.
+#' 
+#' @note Threshold-values for classification into SPEAR should only be changed 
+#' if there is strong indication that they are different than these defaults!
+#' 
+#' @seealso \code{\link{get_traits}}
 #'  
 #' @return A list of two data.frames:
 #' \item{spear}{SPEARvalues per group}

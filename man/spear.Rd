@@ -20,8 +20,10 @@
 
   \item{region}{character string: specify region}
 
-  \item{traits}{either a path to traits database or a
-  data.frame object}
+  \item{traits}{a data.frame holding the trait-database.
+  Default is set to the data.frame from
+  \code{\link[=get_traits]{get_traits()}}. Also a modified
+  trait-table can be supplied (see vignette).}
 
   \item{sensitivity}{numeric; sensitivity-threshold,
   default '-0.36'}
@@ -66,8 +68,12 @@
   where x[i] is the abundance of the taxon i and y is 1 if
   taxon i is classified as 'at risk', otherwise 0.
 
-  For further details about SPEARpesticides index see
-  References.
+  For further details about SPEARpesticides see References.
+}
+\note{
+  Threshold-values for classification into SPEAR should
+  only be changed if there is strong indication that they
+  are different than these defaults!
 }
 \examples{
 require(rspear)
@@ -94,5 +100,8 @@ sp$spear
   pesticide stress in communities - species traits reveal
   community effects of toxicants. \emph{Science of the
   Total Environment}, 406, 484-490.
+}
+\seealso{
+  \code{\link{get_traits}}
 }
 
