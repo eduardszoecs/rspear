@@ -46,8 +46,18 @@
 #' @seealso \code{\link{get_traits}}
 #'  
 #' @return A list of two data.frames:
-#' \item{spear}{SPEARvalues per group}
-#' \item{traits}{Trait table for each Taxon}
+#' \item{spear}{data.frame; SPEAR-values for every combination of the grouping variables.}
+#' \item{traits}{a data.frame with the following columns:}
+#' 
+#'   \item{region, exposed, generationTime, sensitivity, migration}{species traits used to classify 
+#'   species into SPEAR.}
+#'   \item{SPEAR}{Classification of species into SPEAR.}
+#'   \item{taxa_data}{taxon names as in x.}
+#'   \item{taxa_matched}{matched taxon-names in traits-database.}
+#'   \item{match_val}{goodnes of match. '-1' indicates a direct match, 
+#'   'NA' indicates a failed match. Values betweenn 0 and 0.5 indicate an 
+#'   approximate match (smaller values - better match).}
+#'  
 #' 
 #' @references 
 #' Liess M, Von der Ohe P, 2005. Analyzing effects of pesticides on invertebrate communities in streams. \emph{Environmental Toxicology and Chemistry}, 24, 954-965.
@@ -72,26 +82,25 @@ spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL,
                   sensitivity = -0.36, generationTime = 0.5, exposed = 1, 
                   migration = 0){
   if(is.null(traits)){
-    traits <- get_traits()
+    traits <- rspear:::get_traits()
   } else {
     if(!is.data.frame(traits))
       stop("traits must be a data.frame")
   }
-  db_match <- match_traits(x = x, y = traits, takex = taxa, takey = "name")
+  db_match <- rspear:::match_traits(x = x, y = traits, takex = taxa, takey = "name")
   trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
   trait$SPEAR <- ifelse(trait$sensitivity > sensitivity & 
     trait$generationTime >= generationTime & 
     trait$exposed == exposed & 
     trait$migration == migration, 1, 0)
   if(any(is.na(trait$taxa_matched)))
-    warning("There were unmatched species:\n", trait$taxa_data[is.na(trait$taxa_matched)], "\n Set SPEAR to 0")
+    warning("There were unmatched species:\n", trait$taxa_data[is.na(trait$taxa_matched)], "\nSet SPEAR to 0.")
     trait$SPEAR[is.na(trait$taxa_matched)] <- 0
   if(any(trait$match_val > 0))
-    warning("Non-direct taxon matches!\n
-            Check trait table if match is appropiate!!")
+    warning("Non-direct taxon matches!\nCheck trait table if match is appropiate!!")
   df <- merge(x, trait, by.x = taxa, by.y = "taxa_data")
   spear <- ddply(df, group, function(x) c(SPEAR = 100 * sum(log(x[ ,abundance] + 1) * x$SPEAR) / sum(log(x[ ,abundance] + 1))))
   out = list(spear = spear, 
-             traits = trait[ ,c("taxa_data", "taxa_matched", "match_val", "region", "exposed", "generationTime", "sensitivity", "migration", "SPEAR")])
+             traits = trait[order(trait$match_val, decreasing = TRUE, na.last = FALSE) ,c("taxa_data", "taxa_matched", "match_val", "region", "exposed", "generationTime", "sensitivity", "migration", "SPEAR")])
   return(out)
 }

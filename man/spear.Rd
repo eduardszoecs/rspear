@@ -45,8 +45,20 @@
   migration), default '0'}
 }
 \value{
-  A list of two data.frames: \item{spear}{SPEARvalues per
-  group} \item{traits}{Trait table for each Taxon}
+  A list of two data.frames: \item{spear}{data.frame;
+  SPEAR-values for every combination of the grouping
+  variables.} \item{traits}{a data.frame with the following
+  columns:}
+
+  \item{region, exposed, generationTime, sensitivity,
+  migration}{species traits used to classify species into
+  SPEAR.} \item{SPEAR}{Classification of species into
+  SPEAR.} \item{taxa_data}{taxon names as in x.}
+  \item{taxa_matched}{matched taxon-names in
+  traits-database.} \item{match_val}{goodnes of match. '-1'
+  indicates a direct match, 'NA' indicates a failed match.
+  Values betweenn 0 and 0.5 indicate an approximate match
+  (smaller values - better match).}
 }
 \description{
   Calculate SPEAR values
