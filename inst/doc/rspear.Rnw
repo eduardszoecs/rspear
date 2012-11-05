@@ -69,7 +69,7 @@ The main function in the rspear-package is spear():
   \item[abundance] character; name of column in x, which holdes the abundances.
   \item[group] character-vector; names of columns for groupings.
   \item[region] character; default is set to 'Eurasia', which covers trait-data for Finland, United Kingdom, West Siberia and Central Europe. 'Finland', 'United Kingdom', 'West Siberia' are also allowed and traits may vary between different regions.
-  \item[traits] NULL or data.frame; If 'NULL' (default) then it is checked if there is a file 'traits.csv' in the working directory and if this file is up-to-date with the database. If there is no such file, it is downloaded from the web-server. If it is a data.frame, this is used as trait-data (after checking if appropiate).
+  \item[traits] NULL or data.frame; If 'NULL' (default) then it is checked if there is a file 'traits.csv' in the working directory and if this file is up-to-date with the database. If there is no such file, it is downloaded from the web-server. Or a trait-table as returned by \lstinline|spear()|.
   \item[sensitivity, generationTime, exposed, migration] Threshold values for classification into SPEAR. These values should only be changed if there is strong indication that they are different than these defaults! A species is classified to SPEAR if all criteria are met:
   \begin{itemize}
     \item sensitivity > -0.36 
@@ -226,6 +226,31 @@ plot(SPEAR ~ factor(Year), data = spear_df)
 
 \subsection{Modifying trait-values}
 
+To modify trait-values we can use the trait-table returned by spear():
+First we make a copy of the returned trait-table.
+<<>>=
+traits_modi <- sp$traits
+head(traits_modi)
+@
+
+Then we can modify this table. 
+
+For example we set that \emph{Baetis rhodani} is exposed to pesticides:
+<<>>=
+traits_modi[traits_modi$taxa_matched %in% "Baetis rhodani", ]
+traits_modi[traits_modi$taxa_matched %in% "Baetis rhodani", "exposed"] <- c(1,1)
+head(traits_modi)
+@
+
+Note that when selecting \emph{Baetis rhodani} from the trait-table, we have to change two values, because of the spelling error in the data.
+
+This modified trait-table can then be supplied to the 'traits'-Argument of \lstinline|spear()|:
+<<>>=
+sp_modi <- spear(spear_example , 
+            taxa = names(spear_example)[1], abundance = names(spear_example)[2],
+            group = names(spear_example)[3:4], traits = traits_modi)
+sp_modi$spear
+@
 
 
 \end{document}

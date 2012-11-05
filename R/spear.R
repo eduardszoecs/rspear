@@ -95,18 +95,19 @@ spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL,
                             trait$migration == migration, 1, 0)
     trait$SPEAR[is.na(trait$taxa_matched)] <- 0
   } else {
-    if(!any(class(traits) == "spear")())
+    if(!any(class(traits) == "spear"))
       stop("traits must be of class 'spear'!")
     trait <- traits
     trait$SPEAR <- ifelse(trait$sensitivity > sensitivity & 
                             trait$generationTime >= generationTime & 
                             trait$exposed == exposed & 
                             trait$migration == migration, 1, 0)
+    trait$SPEAR[is.na(trait$SPEAR)] <- 0
   }
   df <- merge(x, trait, by.x = taxa, by.y = "taxa_data")
   spear <- ddply(df, group, function(x) c(SPEAR = 100 * sum(log(x[ ,abundance] + 1) * x$SPEAR) / sum(log(x[ ,abundance] + 1))))
   out = list(spear = spear, 
-             traits = trait[order(trait$match_val, decreasing = TRUE, na.last = FALSE) ,c("taxa_data", "taxa_matched", "match_val", "region", "exposed", "generationTime", "sensitivity", "migration", "SPEAR")]
+             traits = trait[order(trait$match_val, decreasing = TRUE, na.last = FALSE), c("taxa_data", "taxa_matched", "match_val", "region", "exposed", "generationTime", "sensitivity", "migration", "SPEAR")])
   class(out$traits) <- c("data.frame", "spear")
   return(out)
 }
