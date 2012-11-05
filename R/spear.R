@@ -9,6 +9,10 @@
 #' @param abundance character string: columnname of abundances
 #' @param region character string: specify region
 #' @param traits either a path to traits database or a data.frame object 
+#' @param sensitivity numeric; sensitivity-threshold, default '-0.36'
+#' @param generationTime numeric; Generation Time threshold, default '0.5'
+#' @param exposed logical; either '1' (exposed) or '0' (not exposed), default '1'
+#' @param migration logical; either '1' (migration) '0' (no migration), default '0'
 #' 
 #' @details
 #' The SPEAR index is based on binary classification of species (or other taxonomic categories) into 'species at risk' and 'species not at risk' according to the following biological traits: 
@@ -44,26 +48,22 @@
 #' data(spear_example)
 #' head(spear_example)
 #' sp <- spear(spear_example ,
-#'    taxa = "Taxon",
-#'    group = c("Year", "Site"), 
+#'    taxa = "Taxon", 
 #'    abundance = "Abundance", 
+#'    group = c("Year", "Site"),
 #'    region = "Eurasia")
 #' sp$traits
 #' sp$spear
-spear <- function(x, taxa = NULL, group = NULL, abundance = NULL, region = "Eurasia", traits = get_traits()){
-  if(!is.data.frame(traits)) {
-    traits <- read.table(file=traits, 
-                     header = TRUE, 
-                     sep = ";", 
-                     stringsAsFactors = FALSE)
-      traits <- traits[traits$region == region, ]
-  }
+spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL, 
+                  region = "Eurasia", traits = get_traits(),
+                  sensitivity = -0.36, generationTime = 0.5, exposed = 1, 
+                  migration = 0){
   db_match <- match_traits(x = x, y = traits, takex = taxa, takey = "name")
   trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
-  trait$SPEAR <- ifelse(trait$sensitivity > -0.36 & 
-    trait$generationTime >= 0.5 & 
-    trait$exposed == 1 & 
-    trait$migration == 0, 1, 0)
+  trait$SPEAR <- ifelse(trait$sensitivity > sensitivity & 
+    trait$generationTime >= generationTime & 
+    trait$exposed == exposed & 
+    trait$migration == migration, 1, 0)
   if(any(is.na(trait$taxa_matched)))
     warning("There were unmatched species:\n", trait$taxa_data[is.na(trait$taxa_matched)], "\n Set SPEAR to 0")
     trait$SPEAR[is.na(trait$taxa_matched)] <- 0

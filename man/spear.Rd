@@ -2,8 +2,10 @@
 \alias{spear}
 \title{Calculate SPEAR values}
 \usage{
-  spear(x, taxa = NULL, group = NULL, abundance = NULL,
-    region = "Eurasia", traits = get_traits())
+  spear(x, taxa = NULL, abundance = NULL, group = NULL,
+    region = "Eurasia", traits = get_traits(),
+    sensitivity = -0.36, generationTime = 0.5, exposed = 1,
+    migration = 0)
 }
 \arguments{
   \item{x}{Abundance data in long format}
@@ -20,6 +22,18 @@
 
   \item{traits}{either a path to traits database or a
   data.frame object}
+
+  \item{sensitivity}{numeric; sensitivity-threshold,
+  default '-0.36'}
+
+  \item{generationTime}{numeric; Generation Time threshold,
+  default '0.5'}
+
+  \item{exposed}{logical; either '1' (exposed) or '0' (not
+  exposed), default '1'}
+
+  \item{migration}{logical; either '1' (migration) '0' (no
+  migration), default '0'}
 }
 \value{
   A list of two data.frames: \item{spear}{SPEARvalues per
@@ -61,8 +75,8 @@ data(spear_example)
 head(spear_example)
 sp <- spear(spear_example ,
    taxa = "Taxon",
-   group = c("Year", "Site"),
    abundance = "Abundance",
+   group = c("Year", "Site"),
    region = "Eurasia")
 sp$traits
 sp$spear
