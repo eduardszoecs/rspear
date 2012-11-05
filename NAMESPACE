@@ -1,3 +1,2 @@
-export(get_traits)
 export(spear)
 import(plyr)

@@ -3,27 +3,34 @@
 \title{Calculate SPEAR values}
 \usage{
   spear(x, taxa = NULL, abundance = NULL, group = NULL,
-    region = "Eurasia", traits = get_traits(),
-    sensitivity = -0.36, generationTime = 0.5, exposed = 1,
-    migration = 0)
+    region = "Eurasia", traits = NULL, sensitivity = -0.36,
+    generationTime = 0.5, exposed = 1, migration = 0)
 }
 \arguments{
-  \item{x}{Abundance data in long format}
+  \item{x}{data.frame; data.frame with abundances in the
+  long format.}
 
-  \item{taxa}{character string: columnnames with taxa}
-
-  \item{group}{character vector naming the columns for
-  groups}
+  \item{taxa}{character; name of column in x, which holdes
+  the taxon-names.}
 
   \item{abundance}{character string: columnname of
   abundances}
 
-  \item{region}{character string: specify region}
+  \item{group}{character-vector; names of columns for
+  groupings.}
 
-  \item{traits}{a data.frame holding the trait-database.
-  Default is set to the data.frame from
-  \code{\link[=get_traits]{get_traits()}}. Also a modified
-  trait-table can be supplied (see vignette).}
+  \item{region}{character; default is set to 'Eurasia',
+  which covers trait-data for Finland, United Kingdom, West
+  Siberia and Central Europe. 'Finland', 'United Kingdom',
+  'West Siberia' are also allowed and traits may vary
+  between different regions.}
+
+  \item{traits}{NULL or data.frame; If 'NULL' (default)
+  then it is checked if there is a file 'traits.csv' in the
+  working directory and if this file is up-to-date with the
+  database. If there is no such file, it is downloaded from
+  the web-server. If it is a data.frame, this is used as
+  trait-data (after checking if appropiate).}
 
   \item{sensitivity}{numeric; sensitivity-threshold,
   default '-0.36'}

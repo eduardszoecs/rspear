@@ -10,9 +10,9 @@ Description: Calculate SPEAR values in R
 License: MIT
 Collate:
     'match_traits.R'
+    'get_traits.R'
     'spear.R'
     'rspear-package.R'
-    'get_traits.R'
 Imports:
     plyr (>= 1.0)
 Suggests:

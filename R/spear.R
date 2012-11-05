@@ -1,15 +1,22 @@
 #' Calculate SPEAR values
 #'
 #' @include match_traits.R
+#' @include get_traits.R
 #' @import plyr
 #' 
-#' @param x Abundance data in long format
-#' @param taxa character string: columnnames with taxa
-#' @param group character vector naming the columns for groups
+#' @param x  data.frame; data.frame with abundances in the long format.
+#' @param taxa character; name of column in x, which holdes the taxon-names.
 #' @param abundance character string: columnname of abundances
-#' @param region character string: specify region
-#' @param traits a data.frame holding the trait-database. Default is set to the data.frame from \code{\link[=get_traits]{get_traits()}}.
-#' Also a modified trait-table can be supplied (see vignette).
+#' @param group character-vector; names of columns for groupings.
+#' @param region character; default is set to 'Eurasia', which covers trait-data 
+#' for Finland, United Kingdom, West Siberia and Central Europe. 'Finland', 
+#' 'United Kingdom', 'West Siberia' are also allowed and traits may vary 
+#' between different regions.
+#' @param traits NULL or data.frame; If 'NULL' (default) then it is checked if 
+#' there is a file 'traits.csv' in the working directory and if this file is 
+#' up-to-date with the database. If there is no such file, it is downloaded 
+#' from the web-server. If it is a data.frame, this is used as trait-data 
+#' (after checking if appropiate).
 #' @param sensitivity numeric; sensitivity-threshold, default '-0.36'
 #' @param generationTime numeric; Generation Time threshold, default '0.5'
 #' @param exposed logical; either '1' (exposed) or '0' (not exposed), default '1'
@@ -61,9 +68,15 @@
 #' sp$traits
 #' sp$spear
 spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL, 
-                  region = "Eurasia", traits = get_traits(),
+                  region = "Eurasia", traits = NULL,
                   sensitivity = -0.36, generationTime = 0.5, exposed = 1, 
                   migration = 0){
+  if(is.null(traits)){
+    traits <- get_traits()
+  } else {
+    if(!is.data.frame(traits))
+      stop("traits must be a data.frame")
+  }
   db_match <- match_traits(x = x, y = traits, takex = taxa, takey = "name")
   trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
   trait$SPEAR <- ifelse(trait$sensitivity > sensitivity & 
@@ -74,7 +87,7 @@ spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL,
     warning("There were unmatched species:\n", trait$taxa_data[is.na(trait$taxa_matched)], "\n Set SPEAR to 0")
     trait$SPEAR[is.na(trait$taxa_matched)] <- 0
   if(any(trait$match_val > 0))
-    warning("Non-direct taxon matches!\
+    warning("Non-direct taxon matches!\n
             Check trait table if match is appropiate!!")
   df <- merge(x, trait, by.x = taxa, by.y = "taxa_data")
   spear <- ddply(df, group, function(x) c(SPEAR = 100 * sum(log(x[ ,abundance] + 1) * x$SPEAR) / sum(log(x[ ,abundance] + 1))))

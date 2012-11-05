@@ -18,7 +18,6 @@
 #' @seealso \code{\link{spear}}
 #' 
 #' @author Eduard Szoecs \email{szoe8822@@uni-landau.de}
-#' @export
 get_traits <- function(){
   last_update <- as.numeric(readLines("http://www.systemecology.eu/rspear/traits-update.txt", n=1))
   # Check if file exists
