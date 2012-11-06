@@ -65,8 +65,8 @@ The main function in the rspear-package is spear():
 \noindent It takes the following arguments:
 \begin{description}[0.5cm]
   \item[x] data.frame;  data.frame with abundances in the long format.
-  \item[taxa] character; name of column in x, which holdes the taxon-names.
-  \item[abundance] character; name of column in x, which holdes the abundances.
+  \item[taxa] character; name of column in x, which holds the taxon-names.
+  \item[abundance] character; name of column in x, which holds the abundances.
   \item[group] character-vector; names of columns for groupings.
   \item[region] character; default is set to 'Eurasia', which covers trait-data for Finland, United Kingdom, West Siberia and Central Europe. 'Finland', 'United Kingdom', 'West Siberia' are also allowed and traits may vary between different regions.
   \item[traits] NULL or data.frame; If 'NULL' (default) then it is checked if there is a file 'traits.csv' in the working directory and if this file is up-to-date with the database. If there is no such file, it is downloaded from the web-server. Or a trait-table as returned by \lstinline|spear()|.
@@ -80,12 +80,12 @@ The main function in the rspear-package is spear():
   \item[...] additional arguments passed to get\_traits(). Currently only 'check' is available. By default the file is checked if up-to-date. See get\_traits().
 \end{description}
 
-Generally the defaults are appropiate and one must only specify \textbf{x, taxa, abundance and group}.\\[1em]
+Generally the defaults are appropriate and one must only specify \textbf{x, taxa, abundance and group}.\\[1em]
 
 
 
 \subsubsection{get\_traits(), Trait-database}
-In order to minimize traffic on server trait-data is saved locally.\\[0.5em]
+In order to minimize traffic on server trait-data is saved locally in the \textbf{working directory} (ensure that it has be set correctly).\\[0.5em]
 
 This is done in \lstinline|spear()|, via the internal function \lstinline|get_traits()|:
 \begin{lstlisting}
@@ -105,10 +105,10 @@ If this file already exists, it is checked if this file is up-to-date with the w
 \begin{lstlisting}
   Warning message:
   Non-direct taxon matches!
-Check trait table if match is appropiate!!
+Check trait table if match is appropriate!!
 \end{lstlisting}
 
-If spear cannot find an appropiate match in the trait table, the SPEAR-value for this species is set to '0' and a warning printed:
+If spear cannot find an appropriate match in the trait table, the SPEAR-value for this species is set to '0' and a warning printed:
 \begin{lstlisting}
   Warning message:
 There were unmatched species:
@@ -126,7 +126,7 @@ xxxxxxxxx
     \item[SPEAR] Classification of species into SPEAR.
     \item[taxa\_data] taxon names as in x.
     \item[taxa\_matched] matched taxon-names in traits-database.
-    \item[match\_val] goodnes of match. '-1' indicates a direct match, 'NA' indicates a failed match. Values betweenn 0 and 0.5 indicate an approximate match (smaller values - better match)
+    \item[match\_val] goodness of match. '-1' indicates a direct match, 'NA' indicates a failed match. Values between 0 and 0.5 indicate an approximate match (smaller values - better match)
     \end{description}
 \end{description}
 
@@ -140,7 +140,7 @@ data(spear_example)
 head(spear_example)
 @
 
-\noindent Decription of the dataset:
+\noindent Description of the data-set:
 \begin{description}[0.5cm]
   \item[Taxon] The taxon names. There are spelling errors in the taxon names (\emph{'Baetis rodani'}), Baetis is listed as \emph{'Baetis sp.'} and \emph{'Baetis'} and there is weird species named \emph{'xxxxxxxxx'}.
   \item[Abundance] Abundances
@@ -207,7 +207,7 @@ xxxxxxxxx
 Set SPEAR to 0.
 2: In spear(spear_example, taxa = names(spear_example)[1],  :
   Non-direct taxon matches!
-Check trait table if match is appropiate!!
+Check trait table if match is appropriate!!
 \end{lstlisting}
 
 \vspace{1em}
@@ -216,7 +216,7 @@ We can check the matches looking at the trait-table returned by \lstinline|spear
 head(sp$traits)
 @
 
-Looking at \lstinline|match_val| we see that there has been no match (match\_val == NA) for taxon 'xxxxxxxxx'  and 'Baetis rodani' has been matched approximately  (match\_val = 0.1) with 'Beatis rhodani'. All other taxa have been matched directly (match\_val = -1). The SPEAR-value for 'xxxxxxxx' has been set to '0'. We could check and clean our input data, but the matches are appropiate in this case.\\[1em]
+Looking at \lstinline|match_val| we see that there has been no match (match\_val == NA) for taxon 'xxxxxxxxx'  and 'Baetis rodani' has been matched approximately  (match\_val = 0.1) with 'Baetis rhodani'. All other taxa have been matched directly (match\_val = -1). The SPEAR-value for 'xxxxxxxx' has been set to '0'. We could check and clean our input data, but the matches are appropriate in this case.\\[1em]
 
 Now let's take a look at the SPEAR-values:
 <<>>=
