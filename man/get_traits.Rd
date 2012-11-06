@@ -2,7 +2,11 @@
 \alias{get_traits}
 \title{Get Trait-data for SPEAR}
 \usage{
-  get_traits()
+  get_traits(check = TRUE)
+}
+\arguments{
+  \item{check}{logical; should the database be checked if
+  up-to-date?}
 }
 \value{
   a data.frame with the trait-database.
@@ -27,6 +31,9 @@
   Therefore the trait-table is downloaded once into the
   workspace and checked if up-to-date with the web-server
   when \code{\link[=spear]{spear()}} is used.
+
+  'check' should be set to \code{FALSE} if working offline
+  (since the check require an internet connection)
 }
 \author{
   Eduard Szoecs \email{szoe8822@uni-landau.de}

@@ -7,12 +7,13 @@ sp <- spear(x = spear_example,
             taxa = "Taxon", 
             group = c("Year", "Site"), 
             abundance = "Abundance", 
-            region = "Eurasia")
+            check = FALSE)
 traits_modi <- sp$traits
 traits_modi[traits_modi$taxa_matched %in% "Baetis rhodani", "exposed"] <- c(1,1)
 sp_modi <- spear(spear_example , 
                  taxa = names(spear_example)[1], abundance = names(spear_example)[2],
-                 group = names(spear_example)[3:4], traits = traits_modi)
+                 group = names(spear_example)[3:4], traits = traits_modi,
+                 check = FALSE)
 
 test_that("Check results from modified traits", {
   expect_that(round(sp_modi$spear$SPEAR, 2),

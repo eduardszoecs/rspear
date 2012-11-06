@@ -7,7 +7,7 @@ sp <- spear(x = spear_example,
       taxa = "Taxon", 
       group = c("Year", "Site"), 
       abundance = "Abundance", 
-      region = "Eurasia")
+      check = FALSE)
 
 test_that("Check results from example data", {
   expect_that(round(sp$spear$SPEAR, 2),

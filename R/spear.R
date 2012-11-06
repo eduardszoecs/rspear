@@ -14,13 +14,16 @@
 #' between different regions.
 #' @param traits NULL or data.frame; If 'NULL' (default) then it is checked if 
 #' there is a file 'traits.csv' in the working directory and if this file is 
-#' up-to-date with the database. If there is no such file, it is downloaded 
-#' from the web-server. If it is a data.frame, this is used as trait-data 
+#' up-to-date with the database, see \code{\link{get_traits}}.
+#' If there is no such file, it is downloaded from the web-server. 
+#' If it is a data.frame, this is used as trait-data 
 #' (after checking if appropiate).
 #' @param sensitivity numeric; sensitivity-threshold, default '-0.36'
 #' @param generationTime numeric; Generation Time threshold, default '0.5'
 #' @param exposed logical; either '1' (exposed) or '0' (not exposed), default '1'
 #' @param migration logical; either '1' (migration) '0' (no migration), default '0'
+#' @param ... additional arguments passed to get_traits. Currently only 'check' is available.
+#' By default the file is checked if up-to-date. See \code{\link{get_traits}}.
 #' 
 #' @details
 #' The SPEAR index is based on binary classification of species (or other taxonomic categories) into 'species at risk' and 'species not at risk' according to the following biological traits: 
@@ -74,15 +77,15 @@
 #'    taxa = "Taxon", 
 #'    abundance = "Abundance", 
 #'    group = c("Year", "Site"),
-#'    region = "Eurasia")
+#'    check = FALSE)
 #' sp$traits
 #' sp$spear
 spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL, 
                   region = "Eurasia", traits = NULL,
                   sensitivity = -0.36, generationTime = 0.5, exposed = 1, 
-                  migration = 0){
+                  migration = 0, ...){
   if(is.null(traits)){
-    traits <- rspear:::get_traits()
+    traits <- rspear:::get_traits(...)
     db_match <- rspear:::match_traits(x = x, y = traits, takex = taxa, takey = "name")
     trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
     if(any(is.na(trait$taxa_matched)))

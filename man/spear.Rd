@@ -4,7 +4,7 @@
 \usage{
   spear(x, taxa = NULL, abundance = NULL, group = NULL,
     region = "Eurasia", traits = NULL, sensitivity = -0.36,
-    generationTime = 0.5, exposed = 1, migration = 0)
+    generationTime = 0.5, exposed = 1, migration = 0, ...)
 }
 \arguments{
   \item{x}{data.frame; data.frame with abundances in the
@@ -28,9 +28,10 @@
   \item{traits}{NULL or data.frame; If 'NULL' (default)
   then it is checked if there is a file 'traits.csv' in the
   working directory and if this file is up-to-date with the
-  database. If there is no such file, it is downloaded from
-  the web-server. If it is a data.frame, this is used as
-  trait-data (after checking if appropiate).}
+  database, see \code{\link{get_traits}}. If there is no
+  such file, it is downloaded from the web-server. If it is
+  a data.frame, this is used as trait-data (after checking
+  if appropiate).}
 
   \item{sensitivity}{numeric; sensitivity-threshold,
   default '-0.36'}
@@ -43,6 +44,10 @@
 
   \item{migration}{logical; either '1' (migration) '0' (no
   migration), default '0'}
+
+  \item{...}{additional arguments passed to get_traits.
+  Currently only 'check' is available. By default the file
+  is checked if up-to-date. See \code{\link{get_traits}}.}
 }
 \value{
   A list of two data.frames: \item{spear}{data.frame;
@@ -102,7 +107,7 @@ sp <- spear(spear_example ,
    taxa = "Taxon",
    abundance = "Abundance",
    group = c("Year", "Site"),
-   region = "Eurasia")
+   check = FALSE)
 sp$traits
 sp$spear
 }
