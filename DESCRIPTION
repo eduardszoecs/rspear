@@ -17,4 +17,5 @@ Collate:
 Imports:
     plyr (>= 1.0)
 Suggests:
-    testthat
+    testthat,
+    reshape2
