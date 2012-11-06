@@ -59,7 +59,7 @@ The main function in the rspear-package is spear():
   spear(x, taxa = NULL, abundance = NULL, group = NULL,
     region = "Eurasia", traits = NULL,
     sensitivity = -0.36, generationTime = 0.5, exposed = 1,
-    migration = 0)
+    migration = 0, ...)
 \end{lstlisting}
 
 \noindent It takes the following arguments:
@@ -71,24 +71,32 @@ The main function in the rspear-package is spear():
   \item[region] character; default is set to 'Eurasia', which covers trait-data for Finland, United Kingdom, West Siberia and Central Europe. 'Finland', 'United Kingdom', 'West Siberia' are also allowed and traits may vary between different regions.
   \item[traits] NULL or data.frame; If 'NULL' (default) then it is checked if there is a file 'traits.csv' in the working directory and if this file is up-to-date with the database. If there is no such file, it is downloaded from the web-server. Or a trait-table as returned by \lstinline|spear()|.
   \item[sensitivity, generationTime, exposed, migration] Threshold values for classification into SPEAR. These values should only be changed if there is strong indication that they are different than these defaults! A species is classified to SPEAR if all criteria are met:
-  \begin{itemize}
-    \item sensitivity > -0.36 
-    \item generationTime >= 0.5 
-    \item exposed == 1 
-    \item migration == 0
-  \end{itemize}
+    \begin{itemize}
+      \item sensitivity > -0.36 
+      \item generationTime >= 0.5 
+      \item exposed == 1 
+      \item migration == 0
+    \end{itemize}
+  \item[...] additional arguments passed to get\_traits(). Currently only 'check' is available. By default the file is checked if up-to-date. See get\_traits().
 \end{description}
 
 Generally the defaults are appropiate and one must only specify \textbf{x, taxa, abundance and group}.\\[1em]
 
 
 
-\subsubsection{Trait-database}
-In order to minimize traffic on server trait-data is saved locally. 
+\subsubsection{get\_traits(), Trait-database}
+In order to minimize traffic on server trait-data is saved locally.\\[0.5em]
 
-\lstinline|spear()| checks if there is file 'traits.csv' in the working directory and otherwise downloads the trait-data from the web-server \url{http://www.systemecology.eu/spear/spear-calculator/} to a file 'traits.csv' into the working directory. 
+This is done in \lstinline|spear()|, via the internal function \lstinline|get_traits()|:
+\begin{lstlisting}
+  get_traits(check = TRUE)
+\end{lstlisting}
 
-If this file already exists, it is checked if this file is up-to-date with the web-server.
+\lstinline|spear()| checks if there is file 'traits.csv' in the working directory and otherwise downloads the trait-data from the web-server \url{http://www.systemecology.eu/spear/spear-calculator/} to a file 'traits.csv' into the working directory. \\[0.5em]
+
+If this file already exists, it is checked if this file is up-to-date with the web-server.\\[0.5em]
+
+\lstinline|get_traits()| takes one argument 'check' which disables checking when 'FALSE'. Check must be disabled when working offline. Check can be passed directly in \lstinline|spear()|, as in most of the examples here.
 
 
 
@@ -120,9 +128,7 @@ xxxxxxxxx
     \item[taxa\_matched] matched taxon-names in traits-database.
     \item[match\_val] goodnes of match. '-1' indicates a direct match, 'NA' indicates a failed match. Values betweenn 0 and 0.5 indicate an approximate match (smaller values - better match)
     \end{description}
-
 \end{description}
-
 
 
 
@@ -166,7 +172,6 @@ head(df_long)
 
 
 
-
 \subsection{Calculation of SPEAR}
 When we have the data in the long-format we can use \lstinline|spear()| to calculate the spear values.
 First argument is our data in the long format (spear\_example), then we must specify the columns coding for 
@@ -183,7 +188,8 @@ Column names can be entered as characters or (less error-prone) using names():
 names(spear_example)
 sp <- spear(spear_example , 
             taxa = names(spear_example)[1], abundance = names(spear_example)[2],
-            group = names(spear_example)[3:4])
+            group = names(spear_example)[3:4], 
+            check = FALSE)
 @
 
 Here we can take advantage of the defaults:
@@ -224,8 +230,9 @@ spear_df <- sp$spear
 plot(SPEAR ~ factor(Year), data = spear_df)
 @
 
-\subsection{Modifying trait-values}
 
+
+\subsection{Modifying trait-values}
 To modify trait-values we can use the trait-table returned by spear():\\[1em]
 First we make a copy of the returned trait-table and then we can modify this table. 
 
@@ -242,9 +249,17 @@ This modified trait-table can then be supplied to the 'traits'-Argument of \lsti
 <<>>=
 sp_modi <- spear(spear_example , 
             taxa = names(spear_example)[1], abundance = names(spear_example)[2],
-            group = names(spear_example)[3:4], traits = traits_modi)
-sp_modi$spear
+            group = names(spear_example)[3:4], 
+            traits = traits_modi,
+            check = FALSE)
+head(sp_modi$spear)
+head(sp_modi$traits)
 @
 
+Note that the SPEAR-values have changed, since \emph{Baetis rhodani} is now classified as Species Ar Risk.
 
+
+
+\subsection{Modifying SPEAR-values}
+TODO
 \end{document}
