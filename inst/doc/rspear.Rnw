@@ -16,7 +16,7 @@
 \parindent=0pt
 
 \title{rspear: Calculate SPEAR in R} 
-\author{Eduard Szoecs}
+\author{Eduard Szöcs}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
@@ -261,5 +261,22 @@ Note that the SPEAR-values have changed, since \emph{Baetis rhodani} is now clas
 
 
 \subsection{Modifying SPEAR-values}
-TODO
+\textit{This is currently not supported.}
+
+However it can be done indirectly by modifying the trait-values (see previous section)
+
+\section{Miscellaneous}
+\subsection{Citation}
+<<>>=
+citation("rspear")
+@
+
+
+
+\subsection{Problems}
+rspear is developed in \href{https://github.com/EDiLD/rspear}{github}.\\
+Any problems/bugs/feature-request may be reported at \href{https://github.com/EDiLD/rspear/issues}{github} or to the author (Eduard Szöcs, \href{mailto:szoe8822@uni-landau.de}{szoe8822@uni-landau.de}) directly.
+
+
+
 \end{document}
