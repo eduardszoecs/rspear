@@ -84,7 +84,18 @@ spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL,
                   region = "Eurasia", traits = NULL,
                   sensitivity = -0.36, generationTime = 0.5, exposed = 1, 
                   migration = 0, ...){
+  # Check User Input
+  if(!taxa %in% names(x))
+    stop("Column '", taxa, "' not found in data!\n
+         Please check colnames.")
+  if(!abundance %in% names(x))
+    stop("Column '", abundance, "' not found in data!\n
+         Please check colnames.")
+  if(!all(group %in% names(x)))
+    stop("Group-column not found in data!\n
+         Please check colnames.")
   if(is.null(traits)){
+    # = get trait-table
     traits <- rspear:::get_traits(...)
     db_match <- rspear:::match_traits(x = x, y = traits, takex = taxa, takey = "name")
     trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
@@ -98,6 +109,7 @@ spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL,
                             trait$migration == migration, 1, 0)
     trait$SPEAR[is.na(trait$taxa_matched)] <- 0
   } else {
+    # = take this as trait tables
     if(!any(class(traits) == "spear"))
       stop("traits must be of class 'spear'!")
     trait <- traits
