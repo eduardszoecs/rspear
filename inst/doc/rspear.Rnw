@@ -38,7 +38,13 @@ For more information please visit:
 
 
 \section{Install rspear}
-rspear is currently under development and not available on \href{http://cran.r-project.org/}{CRAN} yet. To use rspear you have to install it from github:
+rspear can be installed from CRAN:
+<<eval=FALSE>>=
+install.packages('rspear')
+@
+
+
+rspear is developed at \href{https://github.com/EDiLD/rspear}{github}. If you want to install the latest development version from github use:
 <<eval=FALSE>>=
 install.packages("devtools")
 require(devtools)
@@ -48,6 +54,7 @@ require(rspear)
 <<echo=FALSE, results=hide>>=
 require(rspear)
 @
+
 
 
 
@@ -101,7 +108,7 @@ If this file already exists, it is checked if this file is up-to-date with the w
 
 
 \subsubsection{Matching taxon names with trait-database}
-\lstinline|spear()| matches the taxon-names with the trait table using direct and approximate string matching. It is very likely that the matches are not always 100\% (direct) (for example spelling errors, see example in section 'Usage of rspear'). \lstinline|spear()| then tries to find the species with nearest match (approximate match). However this approximate match must not always be the right one! When there are non-direct matches a warning is printed and the user is called to check the match:
+\lstinline|spear()| matches the taxon-names with the trait table using direct and approximate string matching. It is very likely that the matches are not always 100\% (direct) (for example spelling errors, see example in section 'Usage of rspear'). \lstinline|spear()| then tries to find the species with nearest match (approximate match). However this approximate match must not always be appropiate! When there are non-direct matches a warning is printed and the user is called to check the match:
 \begin{lstlisting}
   Warning message:
   Non-direct taxon matches!
@@ -263,7 +270,7 @@ Note that the SPEAR-values have changed, since \emph{Baetis rhodani} is now clas
 \subsection{Modifying SPEAR-values}
 \textit{This is currently not supported.}
 
-However it can be done indirectly by modifying the trait-values (see previous section)
+However it can be done indirectly by modifying the trait-values (see previous section, most easily migration)
 
 \section{Miscellaneous}
 \subsection{Citation}
