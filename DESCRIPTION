@@ -8,7 +8,7 @@ Author: Eduard Szoecs
 Maintainer: Eduard Szoecs <szoe8822@uni-landau.de>
 Description: Calculate SPEARpesticide in R
     (http://www.systemecology.eu/SPEAR/index.php)
-License: MIT
+License: MIT + file LICENSE
 Collate:
     'match_traits.R'
     'get_traits.R'
