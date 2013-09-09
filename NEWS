@@ -1,4 +1,11 @@
-rspear 0.1.0
+rspear 0.1-1
+===============
+
+FIXES
+
+* exlcuded Readme.md from build
+
+rspear 0.1
 ===============
 
 NEW FEATURES

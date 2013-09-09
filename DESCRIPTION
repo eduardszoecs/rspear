@@ -2,8 +2,8 @@ Package: rspear
 Type: Package
 Title: Calculate SPEARpesticide in R
     (http://www.systemecology.eu/SPEAR/index.php)
-Version: 0.1
-Date: 2012-11-06
+Version: 0.1-1
+Date: 2013-09-09
 Author: Eduard Szoecs
 Maintainer: Eduard Szoecs <szoe8822@uni-landau.de>
 Description: Calculate SPEARpesticide in R
