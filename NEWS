@@ -3,7 +3,8 @@ rspear 0.1-1
 
 FIXES
 
-* exlcuded Readme.md from build
+* excluded Readme.md from build
+* fixed for R CMD check
 
 rspear 0.1
 ===============
