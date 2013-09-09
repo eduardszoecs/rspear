@@ -96,8 +96,8 @@ spear <- function(x, taxa = NULL, abundance = NULL,  group = NULL,
          Please check colnames.")
   if(is.null(traits)){
     # = get trait-table
-    traits <- rspear:::get_traits(...)
-    db_match <- rspear:::match_traits(x = x, y = traits, takex = taxa, takey = "name")
+    traits <- get_traits(...)
+    db_match <- match_traits(x = x, y = traits, takex = taxa, takey = "name")
     trait <- cbind(db_match, traits[match(db_match$taxa_matched, traits$name), -1])
     if(any(is.na(trait$taxa_matched)))
       warning("There were unmatched species:\n", trait$taxa_data[is.na(trait$taxa_matched)], "\nSet SPEAR to 0.")
