@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/EDiLD/rspear.png)](https://travis-ci.org/EDiLD/rspear)
+
 # Install `rspear` from GitHub:
 
 ```R 
