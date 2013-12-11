@@ -22,7 +22,7 @@
 #' 
 #' @seealso \code{\link{spear}}
 #' 
-#' @author Eduard Szoecs \email{szoe8822@@uni-landau.de}
+#' @author Eduard Szoecs \email{eduardszoecs@@gmail.com}
 #' @export
 get_traits <- function(check = TRUE){
   # Check if file exists

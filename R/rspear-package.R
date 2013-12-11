@@ -5,7 +5,7 @@
 #' @aliases rspear
 #' @docType package
 #' @title Calculate SPEAR in R
-#' @author Eduard Szoecs \email{szoe8822@@uni-landau.de}
+#' @author Eduard Szoecs \email{eduardszoecs@@gmail.com}
 #' @keywords package
 NULL
 

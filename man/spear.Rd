@@ -112,7 +112,7 @@ sp$traits
 sp$spear
 }
 \author{
-  Eduard Szoecs \email{szoe8822@uni-landau.de}
+  Eduard Szoecs \email{eduardszoecs@gmail.com}
 }
 \references{
   Liess M, Von der Ohe P, 2005. Analyzing effects of

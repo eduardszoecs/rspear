@@ -36,7 +36,7 @@
   (since the check require an internet connection)
 }
 \author{
-  Eduard Szoecs \email{szoe8822@uni-landau.de}
+  Eduard Szoecs \email{eduardszoecs@gmail.com}
 }
 \seealso{
   \code{\link{spear}}

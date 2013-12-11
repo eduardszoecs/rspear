@@ -7,7 +7,7 @@
   Calculate SPEAR in R
 }
 \author{
-  Eduard Szoecs \email{szoe8822@uni-landau.de}
+  Eduard Szoecs \email{eduardszoecs@gmail.com}
 }
 \keyword{package}
 
