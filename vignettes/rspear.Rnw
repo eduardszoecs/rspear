@@ -19,7 +19,7 @@
 \author{Eduard Szöcs}
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+
 
 \maketitle  
 \tableofcontents
@@ -51,7 +51,7 @@ require(devtools)
 install_github("rspear", "EDiLD")
 require(rspear)
 @
-<<echo=FALSE, results=hide>>=
+<<echo=FALSE, results='hide'>>=
 require(rspear)
 @
 
@@ -162,7 +162,7 @@ Like the web application rspear requires data in the long format (see \lstinline
 Ecologists often organized their data in wide format (eg. species x samples matrix). This data must be transformed into the long-format, eg using the melt() function from the reshape2 package.
 
 For example if we have a columns for every species (wide-format):
-<<results=hide, echo=FALSE>>=
+<<results='hide', echo=FALSE>>=
 require(reshape2)
 df_wide <- dcast(spear_example, Site + Year ~ Taxon, value.var="Abundance", fill = 0)[ , 1:6]
 @
